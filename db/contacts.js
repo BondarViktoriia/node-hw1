@@ -21,8 +21,16 @@ async function getContactById(contactId) {
   return contactById;
 }
 
-function removeContact(contactId) {
-  // ...твой код
+async function removeContact(contactId) {
+ const list  = await listContacts();
+ const idx = list.findIndex(item=>item.id === contactId);
+ if(idx === -1){
+  return null;
+ }
+//  const [removeContactById]=list.splice(idx,1);
+const newContactList = list.filter((_,index)=>index !== idx)
+ await fs.writeFile(contactsPath, JSON.stringify(newContactList));
+return list[idx];
 }
 
  async function addContact(name, email, phone) {
