@@ -27,7 +27,6 @@ async function removeContact(contactId) {
  if(idx === -1){
   return null;
  }
-//  const [removeContactById]=list.splice(idx,1);
 const newContactList = list.filter((_,index)=>index !== idx)
  await fs.writeFile(contactsPath, JSON.stringify(newContactList));
 return list[idx];
